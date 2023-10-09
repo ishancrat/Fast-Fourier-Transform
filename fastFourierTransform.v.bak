@@ -1,0 +1,22 @@
+module fastFourierTransform(in,out);
+input [263:0]in; //8 numbers, 32 bit each, 1 bit extra for real/imaginary marking =>33*8 = 264
+output reg[263:0]out;
+
+reg[63:0]W0 = {32'h3F800000,32'h0}; //real and img parts of W0
+reg[63:0]W1 = {32'h3F350481,32'hBF350481};
+reg[63:0]W2 = {32'h0,32'hBF800000};
+reg[63:0]W3 = {2{32'hBF350481}};
+reg[63:0]W4 = {32'hBF800000,32'h0};
+reg[63:0]W5 = {32'h32BF350481,32'h3F350481};
+reg[63:0]W6 = {32'h0,32'h3F800000};
+reg[63:0]W7 = {2{32'h3F350481}};  ś
+
+wire 
+
+
+always @(in) begin
+	out = in;
+end
+
+
+endmodule
