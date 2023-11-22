@@ -1,7 +1,7 @@
-module mainCalc(inputVector,o1,o2,o3,o4);
+module mainCalc(inputVector,o1,o2,o3,o4,o5,o6,o7,o8);
 input [255:0]inputVector; //8 numbers, 32 bit each //assuming only real inputs
 //output [511:0]out; //output is complex valued
-output [63:0]o1,o2,o3,o4;
+output [63:0]o1,o2,o3,o4,o5,o6,o7,o8;
 wire [511:0]out;
 
 // Distribution of 8 numbers in the input vector : DIT FFT
@@ -14,9 +14,9 @@ wire [511:0]out;
 // -- N6 : 63:32
 // -- N7 : 31:0
 
+//twiddle factors below
 reg[31:0] negOne = 32'hBF800000; //value of negative 1
-
-reg[63:0]W0 = {32'h3F800000,32'h0}; //real and img parts of W0 
+reg[63:0]W0 = {32'h3F800000,32'h0}; 
 reg[63:0]W1 = {32'h3F350481,32'hBF350481};
 reg[63:0]W2 = {32'h0,32'hBF800000};
 reg[63:0]W3 = {2{32'hBF350481}};
@@ -24,8 +24,6 @@ reg[63:0]W4 = {32'hBF800000,32'h0};
 reg[63:0]W5 = {32'hBF350481,32'h3F350481};
 reg[63:0]W6 = {32'h0,32'h3F800000};
 reg[63:0]W7 = {2{32'h3F350481}};  
-
-//module multiplierFloat(productOut, input1, input2);
 
 wire[63:0]L0; wire[63:0]M0; wire[63:0]I0; wire[63:0]N0; assign L0[31:0] = 32'd0;
 wire[63:0]L1; wire[63:0]M1; wire[63:0]I1; wire[63:0]N1; assign L1[31:0] = 32'd0;
@@ -81,8 +79,14 @@ complexAdder compAdder14(out[191:128],M1,N5);
 complexAdder compAdder15(out[127:64],M2,N6);
 complexAdder compAdder16(out[63:0],M3,N7);
 
-assign o1 = out[255:192];
-assign o2 = out[191:128];
-assign o3 = out[127:64];
-assign o4 = out[63:0];
+assign o1 = out[511:448];
+assign o2 = out[447:384];
+assign o3 = out[383:320];
+assign o4 = out[319:256];
+
+assign o5 = out[255:192];
+assign o6 = out[191:128];
+assign o7 = out[127:64];
+assign o8 = out[63:0];
+
 endmodule
