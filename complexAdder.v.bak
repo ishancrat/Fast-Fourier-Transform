@@ -1,3 +1,0 @@
-module complexAdder(outComplex,inComplex1,inComplex2);
-input [63:0] inComplex1,inComplex2;
-output [63:0] outComplex;
